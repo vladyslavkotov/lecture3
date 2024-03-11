@@ -23,7 +23,7 @@ public:
 		}
 	}
 
-	WeakPtr(const SharedPtr<Resource>& rhs) : data(rhs.data), useCount(rhs.refCount)
+	WeakPtr(const SharedPtr<Resource>& rhs) : data(rhs.data), useCount(rhs.useCount)
 	{
 		if (weakCount)
 		{
@@ -53,10 +53,10 @@ public:
 		{
 			Reset();
 			data = rhs.data;
-			useCount = rhs.refCount;
+			useCount = rhs.useCount;
 			if (useCount)
 			{
-				weakCount = new size_t(1)
+				weakCount = new size_t(1);
 			}
 		}
 		return *this;

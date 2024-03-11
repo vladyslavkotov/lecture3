@@ -12,10 +12,8 @@ class SharedPtr
 public:
 	SharedPtr() : data(nullptr), useCount(nullptr) {}
 
-	// it's a ctor, we can't initialize existing sharedptr with resource
-	SharedPtr(Resource* res) : data(res), useCount(new size_t(1)) {}
+	explicit SharedPtr(Resource* res) : data(res), useCount(new size_t(1)) {}
 
-	// pass shared ptr to  create another shared ptr. if it's empty, skip, if not, increment count
 	SharedPtr(const SharedPtr<Resource>& rhs) : data(rhs.data), useCount(rhs.useCount)
 	{
 		if (useCount)
